@@ -24,7 +24,7 @@ const vitePluginRemoteDeploy = (serverConfig: ServerConfig): Plugin => {
     async closeBundle() {
       // 在 Vite 构建完成后执行的钩子函数，用于处理上传逻辑
       // 检查 SFTP 配置是否存在 host、username、password 属性，如果不存在则抛出错误
-      if (!serverConfig.host || !serverConfig.username || !serverConfig.password) {
+      if (!serverConfig.host || !serverConfig.username || (!serverConfig.password && !serverConfig.privateKey)) {
         throw new Error('SFTP config is missing host, username, or password.');
       }
 
